@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roll the Dice</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .scene {
+        width: 200px;
+        height: 200px;
+        perspective: 600px;
+        border: 1px solid black;
+      }
+
+      .cube {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transform: translateZ(-100px);
+        transition: transform 1s;
+        cursor: pointer;
+      }
+
+      .cube__face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+      }
+
+      .cube__face--front {
+        background-color: red;
+        transform: rotateY(0deg) translateZ(100px);
+      }
+
+      .cube__face--back {
+        background-color: green;
+        transform: rotateY(180deg) translateZ(100px);
+      }
+
+      .cube__face--right {
+        background-color: yellow;
+        transform: rotateY(90deg) translateZ(100px);
+      }
+
+      .cube__face--left {
+        background-color: teal;
+        transform: rotateY(-90deg) translateZ(100px);
+      }
+
+      .cube__face--top {
+        background-color: blue;
+        transform: rotateX(90deg) translateZ(100px);
+      }
+
+      .cube__face--bottom {
+        background-color: purple;
+        transform: rotateX(-90deg) translateZ(100px);
+      }
+
+      .cube__face__text {
+        display: grid;
+        justify-content: center;
+        align-content: center;
+        height: 100%;
+        font-size: 2rem;
+        color: white;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body
+    style="
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      height: 100vh;
+    "
+  >
+    <div class="scene">
+      <div class="cube" onclick="rollCube()">
+        <div class="cube__face cube__face--front">
+          <div class="cube__face__text">front</div>
+        </div>
+        <div class="cube__face cube__face--back">
+          <div class="cube__face__text">back</div>
+        </div>
+        <div class="cube__face cube__face--right">
+          <div class="cube__face__text">right</div>
+        </div>
+        <div class="cube__face cube__face--left">
+          <div class="cube__face__text">left</div>
+        </div>
+        <div class="cube__face cube__face--top">
+          <div class="cube__face__text">top</div>
+        </div>
+        <div class="cube__face cube__face--bottom">
+          <div class="cube__face__text">bottom</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const rotationNames = [
+        "show-front",
+        "show-right",
+        "show-back",
+        "show-left",
+        "show-top",
+        "show-bottom",
+      ];
+      let current = "";
+      function getRotationName(rotation) {
+        const random = Math.floor(Math.random() * 6);
+        return rotationNames[random];
+      }
+      function rollCube() {
+        const cube = document.querySelector(".cube");
+        cube.style.transform = "";
+
+        let rotationName = getRotationName();
+        while (current === rotationName) {
+          rotationName = getRotationName();
+        }
+        current = rotationName;
+
+        function calculateRotation(degrees) {
+          return degrees;
+        }
+
+        // TODO: Figure out a way to always have the cube rotate on each axis.
+        switch (rotationName) {
+          case "show-front": {
+            const x = calculateRotation(1800);
+            const y = calculateRotation(1800);
+            const z = calculateRotation(1800);
+            cube.style.transform = `translateZ(-100px) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+            break;
+          }
+          case "show-right": {
+            const x = calculateRotation(1800);
+            const y = calculateRotation(-1890);
+            const z = calculateRotation(1800);
+            cube.style.transform = `translateZ(-100px) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+            break;
+          }
+          case "show-back": {
+            const x = calculateRotation(1800);
+            const y = calculateRotation(-1980);
+            const z = calculateRotation(1800);
+            cube.style.transform = `translateZ(-100px) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+            break;
+          }
+          case "show-left": {
+            const x = calculateRotation(1800);
+            const y = calculateRotation(1890);
+            const z = calculateRotation(1800);
+            cube.style.transform = `translateZ(-100px) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+            break;
+          }
+          case "show-top": {
+            const x = calculateRotation(-1890);
+            const y = calculateRotation(1800);
+            const z = calculateRotation(1800);
+            cube.style.transform = `translateZ(-100px) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+            break;
+          }
+          case "show-bottom": {
+            const x = calculateRotation(1890);
+            const y = calculateRotation(1800);
+            const z = calculateRotation(1800);
+            cube.style.transform = `translateZ(-100px) rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
+            break;
+          }
+          default:
+            throw new Error("Invalid rotation name");
+        }
+      }
+    </script>
+  </body>
+</html>
