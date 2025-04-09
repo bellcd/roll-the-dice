@@ -25,7 +25,6 @@
         transform-style: preserve-3d;
         transform: translateZ(-100px);
         transition: transform 1s;
-        cursor: pointer;
       }
 
       .cube__face {
@@ -35,32 +34,32 @@
       }
 
       .cube__face--front {
-        background-color: red;
+        background-color: #2c3e50;
         transform: rotateY(0deg) translateZ(100px);
       }
 
       .cube__face--back {
-        background-color: green;
+        background-color: #3498db;
         transform: rotateY(180deg) translateZ(100px);
       }
 
       .cube__face--right {
-        background-color: yellow;
+        background-color: #e74c3c;
         transform: rotateY(90deg) translateZ(100px);
       }
 
       .cube__face--left {
-        background-color: teal;
+        background-color: #2ecc71;
         transform: rotateY(-90deg) translateZ(100px);
       }
 
       .cube__face--top {
-        background-color: blue;
+        background-color: #9b59b6;
         transform: rotateX(90deg) translateZ(100px);
       }
 
       .cube__face--bottom {
-        background-color: purple;
+        background-color: #f1c40f;
         transform: rotateX(-90deg) translateZ(100px);
       }
 
@@ -73,6 +72,33 @@
         color: white;
         font-weight: bold;
       }
+
+      .roll-button {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 24px;
+        font-size: 1.2rem;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .roll-button:hover {
+        background-color: #45a049;
+        transform: translateX(-50%) translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .roll-button:active {
+        transform: translateX(-50%) translateY(1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
     </style>
   </head>
   <body
@@ -84,7 +110,7 @@
     "
   >
     <div class="scene">
-      <div class="cube" onclick="rollCube()">
+      <div class="cube">
         <div class="cube__face cube__face--front">
           <div class="cube__face__text">front</div>
         </div>
@@ -105,6 +131,7 @@
         </div>
       </div>
     </div>
+    <button class="roll-button" onclick="rollCube()">Roll the Dice</button>
     <script>
       const rotationNames = [
         "show-front",
